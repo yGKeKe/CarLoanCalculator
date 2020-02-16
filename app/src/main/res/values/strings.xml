@@ -8,4 +8,5 @@
     <string name="LengthOfLoan">Length Of Loan: </string>
     <string name="MonthlyPayment">Monthly Payment: </string>
     <string name="CalcPayment">Calculate Monthly Payment</string>
+    <string name="blank"></string>
 </resources>

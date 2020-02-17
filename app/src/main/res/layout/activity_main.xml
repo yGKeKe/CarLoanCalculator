@@ -52,13 +52,11 @@
         android:id="@+id/textDownPayment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="22dp"
-        android:layout_marginBottom="6dp"
-        android:layout_marginStart="52dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/DownPayment"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/editDownPayment"
-        app:layout_constraintEnd_toStartOf="@+id/editDownPayment" />
+        app:layout_constraintStart_toStartOf="@+id/textCostOfCar" />
 
     <TextView
         android:id="@+id/textAPR"
@@ -75,7 +73,7 @@
 
     <RadioGroup
         android:id="@+id/radioGroup2"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:orientation="horizontal"
@@ -87,8 +85,7 @@
             android:id="@+id/radLease"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="100dp"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:checked="false"
             android:onClick="onRadioButtonClicked"
             android:text="@string/Lease" />
@@ -97,8 +94,7 @@
             android:id="@+id/radBuy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="100dp"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:checked="true"
             android:onClick="onRadioButtonClicked"
             android:text="@string/Buy" />
@@ -128,21 +124,24 @@
         android:id="@+id/textLengthOfLoan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="31dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:text="@string/LengthOfLoan"
-        app:layout_constraintEnd_toEndOf="@+id/textMonthlyPayment"
+        app:layout_constraintEnd_toEndOf="@+id/editMonthlyPayment"
+        app:layout_constraintHorizontal_bias="0.537"
+        app:layout_constraintStart_toStartOf="@+id/editMonthlyPayment"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
 
     <TextView
         android:id="@+id/textNumMonth"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="18dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="8dp"
         android:text="1"
         android:textAlignment="center"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textLengthOfLoan"
-        app:layout_constraintEnd_toEndOf="@+id/textMonthlyPayment"
-        app:layout_constraintStart_toEndOf="@+id/textLengthOfLoan" />
+        app:layout_constraintEnd_toEndOf="@+id/seekBarMonths"
+        app:layout_constraintStart_toStartOf="@+id/seekBarMonths"
+        app:layout_constraintTop_toBottomOf="@+id/textLengthOfLoan" />
 
     <TextView
         android:id="@+id/textMonthlyPayment"

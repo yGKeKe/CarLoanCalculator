@@ -2,6 +2,7 @@ package com.example.carloancalculator;
 
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.math.MathUtils;
 
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private double dblCarCost;
     private double dblDownPayment;
     private double dblAPR;
+    private double dblMPR;
     private double dblMonths;
     private boolean boolLease;
     Toast toastError;
@@ -94,42 +96,40 @@ public class MainActivity extends AppCompatActivity {
 
     //calculate monthly payments on button click
     public void butCalcMonthlyPayment(View view){
-        if(!TextUtils.isEmpty(editCost.getText())){
+        if(!TextUtils.isEmpty(editCost.getText())) {
             dblCarCost = getDouble(editCost);
+            if (!TextUtils.isEmpty(editPayment.getText())) {
+                dblDownPayment = getDouble(editPayment);
+                if (!TextUtils.isEmpty(editAPR.getText())) {
+                    dblAPR = getDouble(editAPR) / 100;
+                    dblMPR = dblAPR / 12;
+                    dblMonths = getDouble(tvNumMonths);
+
+                    if (boolLease) {
+                        double dblLeasedCar = (dblCarCost / 3) - dblDownPayment;
+                        double dblNegMonths = -36;
+                        double dblMonthlyPayments = (dblMPR * dblLeasedCar) / (1 - Math.pow((1 + dblMPR), dblNegMonths));
+                        dblMonthlyPayments = roundTwoDecimal(dblMonthlyPayments);
+                        editMonthlyPayment.setText("$" + dblMonthlyPayments + "");
+                    } else if (!boolLease) {
+                        double dblBoughtCar = dblCarCost - dblDownPayment;
+                        double dblNegMonths = -dblMonths;
+                        double dblMonthlyPayments = (dblMPR * (dblBoughtCar) / (1 - Math.pow((1 + dblMPR), dblNegMonths)));
+                        dblMonthlyPayments = roundTwoDecimal(dblMonthlyPayments);
+                        editMonthlyPayment.setText("$" + dblMonthlyPayments + "");
+                    }
+                }else{
+                    toastError = Toast.makeText(this, "Please enter a valid decimal number.", Toast.LENGTH_LONG);
+                    toastError.show();
+                }
+            }else{
+                toastError = Toast.makeText(this, "Please enter a valid number.", Toast.LENGTH_LONG);
+                toastError.show();
+            }
         }else{
             toastError = Toast.makeText(this, "Please enter a valid number.", Toast.LENGTH_LONG);
             toastError.show();
-        }
-
-        if(!TextUtils.isEmpty(editPayment.getText())){
-            dblDownPayment = getDouble(editPayment);
-        }else{
-            toastError = Toast.makeText(this, "Please enter a valid number.", Toast.LENGTH_LONG);
-            toastError.show();
-        }
-
-        if(!TextUtils.isEmpty(editAPR.getText())){
-            dblAPR = getDouble(editAPR);
-            dblAPR = dblAPR / 12;
-        }else{
-            toastError = Toast.makeText(this, "Please enter a valid number.", Toast.LENGTH_LONG);
-            toastError.show();
-        }
-
-        dblMonths = getDouble(tvNumMonths);
-
-        if(!boolLease){
-            double dblLeasedCar = (dblCarCost - dblDownPayment) / 3;
-            double dblNegMonths = -36;
-            double dblMonthlyPayments = dblAPR * (dblLeasedCar / (1 - Math.pow(1 + dblAPR, dblNegMonths)));
-            dblMonthlyPayments = roundTwoDecimal(dblMonthlyPayments);
-            editMonthlyPayment.setText(dblMonthlyPayments+"");
-        }else if(boolLease){
-            double dblBoughtCar = dblCarCost - dblDownPayment;
-            double dblNegMonths = -dblMonths;
-            double dblMonthlyPayments = dblAPR * (dblBoughtCar / (1 - Math.pow(1 + dblAPR, dblNegMonths)));
-            dblMonthlyPayments = roundTwoDecimal(dblMonthlyPayments);
-            editMonthlyPayment.setText(dblMonthlyPayments+"");
         }
     }
 }
+

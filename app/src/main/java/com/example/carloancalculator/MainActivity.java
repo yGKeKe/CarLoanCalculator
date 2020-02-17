@@ -79,12 +79,10 @@ public class MainActivity extends AppCompatActivity {
 
         switch(view.getId()){
             case R.id.radLease:
-                if(checked)
-                    boolLease = true;
+                if(checked) boolLease = true;
                 break;
             case R.id.radBuy:
-                if(checked)
-                    boolLease = false;
+                if(checked) boolLease = false;
                 break;
         }
     }

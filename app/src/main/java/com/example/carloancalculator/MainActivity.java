@@ -20,11 +20,6 @@ public class MainActivity extends AppCompatActivity {
     private SeekBar seekbarMonths;
     private TextView tvNumMonths;
     private EditText editCost, editPayment, editAPR, editMonthlyPayment;
-    private double dblCarCost;
-    private double dblDownPayment;
-    private double dblAPR;
-    private double dblMPR;
-    private double dblMonths;
     private boolean boolLease;
     Toast toastError;
 
@@ -97,13 +92,13 @@ public class MainActivity extends AppCompatActivity {
     //calculate monthly payments on button click
     public void butCalcMonthlyPayment(View view){
         if(!TextUtils.isEmpty(editCost.getText()) && getDouble(editCost) != 0) {
-            dblCarCost = getDouble(editCost);
+            double dblCarCost = getDouble(editCost);
             if (!TextUtils.isEmpty(editPayment.getText())) {
-                dblDownPayment = getDouble(editPayment);
+                double dblDownPayment = getDouble(editPayment);
                 if (!TextUtils.isEmpty(editAPR.getText()) && getDouble(editAPR) != 0) {
-                    dblAPR = getDouble(editAPR) / 100;
-                    dblMPR = dblAPR / 12;
-                    dblMonths = getDouble(tvNumMonths);
+                    double dblAPR = getDouble(editAPR) / 100;
+                    double dblMPR = dblAPR / 12;
+                    double dblMonths = getDouble(tvNumMonths);
 
                     if (boolLease) {
                         double dblLeasedCar = (dblCarCost / 3) - dblDownPayment;
@@ -119,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                         editMonthlyPayment.setText("$" + dblMonthlyPayments + "");
                     }
                 }else{
-                    toastError = Toast.makeText(this, "Please enter a valid decimal number.", Toast.LENGTH_LONG);
+                    toastError = Toast.makeText(this, "Please enter a valid non-zero decimal number into APR field.", Toast.LENGTH_LONG);
                     toastError.show();
                 }
             }else{
@@ -127,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                 toastError.show();
             }
         }else{
-            toastError = Toast.makeText(this, "Please enter a valid number.", Toast.LENGTH_LONG);
+            toastError = Toast.makeText(this, "Please enter a valid non-zero number into Cost Of Car field..", Toast.LENGTH_LONG);
             toastError.show();
         }
     }

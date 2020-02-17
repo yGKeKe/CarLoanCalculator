@@ -1,8 +1,6 @@
 package com.example.carloancalculator;
 
-import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.math.MathUtils;
 
 import android.os.Bundle;
 import android.text.TextUtils;

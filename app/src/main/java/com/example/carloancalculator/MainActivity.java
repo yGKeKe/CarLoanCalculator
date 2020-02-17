@@ -96,11 +96,11 @@ public class MainActivity extends AppCompatActivity {
 
     //calculate monthly payments on button click
     public void butCalcMonthlyPayment(View view){
-        if(!TextUtils.isEmpty(editCost.getText())) {
+        if(!TextUtils.isEmpty(editCost.getText()) && getDouble(editCost) != 0) {
             dblCarCost = getDouble(editCost);
             if (!TextUtils.isEmpty(editPayment.getText())) {
                 dblDownPayment = getDouble(editPayment);
-                if (!TextUtils.isEmpty(editAPR.getText())) {
+                if (!TextUtils.isEmpty(editAPR.getText()) && getDouble(editAPR) != 0) {
                     dblAPR = getDouble(editAPR) / 100;
                     dblMPR = dblAPR / 12;
                     dblMonths = getDouble(tvNumMonths);
